@@ -1,25 +1,174 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pagina Principal</title>
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Restaurante Delicioso</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #fff8f0;
+      color: #333;
+    }
 
+    header {
+      background-color: #d62828;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: center;
+      padding: 0;
+      background: #fcbf49;
+      margin: 0;
+    }
+
+    nav ul li {
+      margin: 0 20px;
+      padding: 15px;
+    }
+
+    nav ul li:hover {
+      background-color: #f77f00;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 30px;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .plato {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .plato img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    form {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #d62828;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #003049;
+      color: white;
+      margin-top: 40px;
+    }
+  </style>
+</head>
 <body>
-  <h1>Titulo Principal</h1>
-  <h3>Menu</h3>
+
+<header>
+  <h1>Restaurante Delicioso</h1>
+  <p>¡Bienvenido a la mejor experiencia gastronómica!</p>
+</header>
+
+<nav>
   <ul>
     <li>Inicio</li>
+    <li>Menú</li>
+    <li>Pedidos</li>
     <li>Contacto</li>
-    <li>Ventas</li>
   </ul>
-  <hr>
-  <h3>Contenido principal</h3>
-  <p>Estoy trabajando con el sistema decontrol de control de versiones de GIT</p>
-  <h4>Contenido de contactos</h4>
-  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas neque officiis itaque quidem maiores blanditiis aliquid cum. Eos, modi, maxime ad facere maiores reiciendis, labore nostrum voluptas et qui tempora?</p>
-</body>
+</nav>
 
+<section>
+  <h2>Menú del Día</h2>
+  <div class="menu">
+    <div class="plato">
+      <img src="https://source.unsplash.com/200x150/?pizza" alt="Pizza">
+      <h3>Pizza Margarita</h3>
+      <p>Queso, tomate y albahaca.</p>
+      <p><strong>$8.00</strong></p>
+    </div>
+    <div class="plato">
+      <img src="https://source.unsplash.com/200x150/?burger" alt="Hamburguesa">
+      <h3>Hamburguesa Clásica</h3>
+      <p>Carne, lechuga, tomate, queso cheddar.</p>
+      <p><strong>$7.50</strong></p>
+    </div>
+    <div class="plato">
+      <img src="https://source.unsplash.com/200x150/?pasta" alt="Pasta">
+      <h3>Pasta Alfredo</h3>
+      <p>Pasta con crema y pollo.</p>
+      <p><strong>$9.00</strong></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Realiza tu Pedido</h2>
+  <form onsubmit="enviarPedido(event)">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" required>
+
+    <label for="plato">Plato:</label>
+    <select id="plato" required>
+      <option value="">Selecciona un plato</option>
+      <option>Pizza Margarita</option>
+      <option>Hamburguesa Clásica</option>
+      <option>Pasta Alfredo</option>
+    </select>
+
+    <label for="direccion">Dirección:</label>
+    <textarea id="direccion" rows="3" required></textarea>
+
+    <button type="submit">Enviar Pedido</button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2025 Restaurante Delicioso. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+  function enviarPedido(e) {
+    e.preventDefault();
+    const nombre = document.getElementById("nombre").value;
+    const plato = document.getElementById("plato").value;
+    const direccion = document.getElementById("direccion").value;
+
+    alert(`Gracias ${nombre}, tu pedido de "${plato}" será enviado a: ${direccion}`);
+  }
+</script>
+
+</body>
 </html>
