@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Restaurante Delicioso</title>
+  <title>Restaurante Dinámico</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -31,15 +31,20 @@
     nav ul li {
       margin: 0 20px;
       padding: 15px;
+      cursor: pointer;
     }
 
     nav ul li:hover {
       background-color: #f77f00;
-      cursor: pointer;
     }
 
     section {
+      display: none;
       padding: 30px;
+    }
+
+    section.active {
+      display: block;
     }
 
     .menu {
@@ -92,6 +97,13 @@
       color: white;
       margin-top: 40px;
     }
+
+    .pedido-item {
+      margin: 10px 0;
+      background: #ffe8cc;
+      padding: 10px;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
@@ -103,30 +115,29 @@
 
 <nav>
   <ul>
-    <li>Inicio</li>
-    <li>Menú</li>
-    <li>Pedidos</li>
-    <li>Contacto</li>
+    <li onclick="mostrarSeccion('menu')">Menú</li>
+    <li onclick="mostrarSeccion('pedidos')">Pedidos</li>
+    <li onclick="mostrarSeccion('contacto')">Contacto</li>
   </ul>
 </nav>
 
-<section>
+<section id="menu" class="active">
   <h2>Menú del Día</h2>
   <div class="menu">
     <div class="plato">
-      <img src="img/pizza.jpg" alt="Pizza">
+      <img src="https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg" alt="Pizza">
       <h3>Pizza Margarita</h3>
       <p>Queso, tomate y albahaca.</p>
       <p><strong>$8.00</strong></p>
     </div>
     <div class="plato">
-      <img src="img/hamburguesa.jpeg" alt="Hamburguesa">
+      <img src="https://www.themealdb.com/images/media/meals/urystu1511387078.jpg" alt="Hamburguesa">
       <h3>Hamburguesa Clásica</h3>
       <p>Carne, lechuga, tomate, queso cheddar.</p>
       <p><strong>$7.50</strong></p>
     </div>
     <div class="plato">
-      <img src="img/pasta.jpeg" alt="Pasta">
+      <img src="https://www.themealdb.com/images/media/meals/wtsvxx1511296896.jpg" alt="Pasta">
       <h3>Pasta Alfredo</h3>
       <p>Pasta con crema y pollo.</p>
       <p><strong>$9.00</strong></p>
@@ -134,7 +145,7 @@
   </div>
 </section>
 
-<section>
+<section id="pedidos">
   <h2>Realiza tu Pedido</h2>
   <form onsubmit="enviarPedido(event)">
     <label for="nombre">Nombre:</label>
@@ -153,6 +164,16 @@
 
     <button type="submit">Enviar Pedido</button>
   </form>
+
+  <h3>Lista de Pedidos:</h3>
+  <div id="lista-pedidos"></div>
+</section>
+
+<section id="contacto">
+  <h2>Contáctanos</h2>
+  <p><strong>Teléfono:</strong> +593 987 654 321</p>
+  <p><strong>Email:</strong> contacto@restaurantedelicioso.com</p>
+  <p><strong>Dirección:</strong> Calle de los Sabores 123, Ciudad Gusto</p>
 </section>
 
 <footer>
@@ -160,13 +181,26 @@
 </footer>
 
 <script>
+  function mostrarSeccion(id) {
+    document.querySelectorAll('section').forEach(sec => {
+      sec.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+  }
+
   function enviarPedido(e) {
     e.preventDefault();
     const nombre = document.getElementById("nombre").value;
     const plato = document.getElementById("plato").value;
     const direccion = document.getElementById("direccion").value;
 
-    alert(`Gracias ${nombre}, tu pedido de "${plato}" será enviado a: ${direccion}`);
+    const divLista = document.getElementById("lista-pedidos");
+    const pedido = document.createElement("div");
+    pedido.classList.add("pedido-item");
+    pedido.textContent = `Pedido de ${nombre}: ${plato} para enviar a ${direccion}`;
+    divLista.appendChild(pedido);
+
+    e.target.reset(); // limpiar formulario
   }
 </script>
 
